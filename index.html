@@ -1,0 +1,95 @@
+<html>
+<head>
+    <style>
+        body {
+            background-color: lavender;
+            font-family: Arial, sans-serif;
+        }
+        
+        .calculator {
+            display: inline-block;
+            border: 1px solid teal;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: teal;
+            color: white;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        table td {
+            padding: 5px 10px;
+            border: 1px solid white;
+            text-align: center;
+        }
+    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<center>
+    <div class="calculator">
+        <input type="text" id="expression" readonly>
+        <br>
+        <table>
+            <tr>
+                <td><button onclick="appendToExpression('7')">7</button></td>
+                <td><button onclick="appendToExpression('8')">8</button></td>
+                <td><button onclick="appendToExpression('9')">9</button></td>
+                <td><button onclick="appendToExpression('/')">/</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToExpression('4')">4</button></td>
+                <td><button onclick="appendToExpression('5')">5</button></td>
+                <td><button onclick="appendToExpression('6')">6</button></td>
+                <td><button onclick="appendToExpression('*')">*</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToExpression('1')">1</button></td>
+                <td><button onclick="appendToExpression('2')">2</button></td>
+                <td><button onclick="appendToExpression('3')">3</button></td>
+                <td><button onclick="appendToExpression('-')">-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToExpression('0')">0</button></td>
+                <td><button onclick="appendToExpression('.')">.</button></td>
+                <td><button onclick="calculateResult()">=</button></td>
+                <td><button onclick="appendToExpression('+')">+</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="appendToExpression('(')">(</button></td>
+                <td><button onclick="appendToExpression(')')">)</button></td>
+                <td><button onclick="appendToExpression('**')">^</button></td>
+                <td><button onclick="clearLastEntry()">CE</button></td>
+            </tr>
+        </table>
+    </div>
+</center>
+    <script>
+        function appendToExpression(value) {
+            document.getElementById("expression").value += value;
+        }
+
+        function clearLastEntry() {
+            var expression = document.getElementById("expression").value;
+            document.getElementById("expression").value = expression.slice(0, -1);
+        }
+
+        function calculateResult() {
+            var expression = document.getElementById("expression").value;
+
+            try {
+                var result = eval(expression);
+                if (isNaN(result) || result === undefined) {
+                    throw new Error("Invalid input");
+                }
+                alert("Result: " + result);
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
